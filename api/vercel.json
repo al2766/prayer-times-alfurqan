@@ -1,0 +1,8 @@
+
+
+{
+    "routes": [
+      { "src": "/api/prayerTimes", "dest": "api/prayerTimes.js" }
+    ]
+  }
+  

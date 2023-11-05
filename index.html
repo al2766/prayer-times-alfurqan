@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Times API</title>
+</head>
+<body>
+  <script>
+    console.log("hello")
+  const url = "http://www.masjidetaqwa.co.uk/TaqwaNew/3MPrayerTimes_Published1/Main.aspx";
+
+// Make a GET request using the fetch API
+fetch(url)
+  .then(response => response.text())
+  .then(data => {
+    conole.log(data)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, "text/html");
+
+    const fajrTomorrow = doc.querySelector('#jfajrtomorrow').textContent;
+    const fajrTomorrowFont = doc.querySelector('#bfajrtomorrow').textContent;
+    const zuhurTomorrow = doc.querySelector('#bzuhrtomorrow').textContent;
+    const asrTomorrow = doc.querySelector('#basrtomorrow').textContent;
+    const maghribTomorrow = doc.querySelector('#bmaghribtomorrow').textContent;
+    const ishaTomorrow = doc.querySelector('#bishatomorrow').textContent;
+
+    const jsonData = {
+      fajr_tomorrow: fajrTomorrow,
+      fajr_tomorrow_font: fajrTomorrowFont,
+      zuhur_tomorrow: zuhurTomorrow,
+      asr_tomorrow: asrTomorrow,
+      maghrib_tomorrow: maghribTomorrow,
+      isha_tomorrow: ishaTomorrow,
+    };
+
+    console.log(JSON.stringify(jsonData, null, 2));
+  })
+  .catch(error => console.error("Error fetching data:", error));
+
+  </script>
+</body>
+</html>
